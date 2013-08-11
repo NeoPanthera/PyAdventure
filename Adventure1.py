@@ -1,15 +1,17 @@
 from random import randint
+from random import choice
 import random
 
 class Player(object):
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
+		self.name = "John"
         self.weapon = "Unarmed"
         self.inventory = []
         self.status = "Normal"
 
-player = Player("John")
+player = Player()
+weapon_list = ['dagger', 'gun', 'sword', 'magical staff', 'lance', 'axe']
 
 class Item(object):
 	
@@ -60,14 +62,14 @@ class River(Scene):
 			
 	def jump(self):
 		print "You get a running start to jump over the gate!"
-			print "The guard flashes out of the booth in front of you, stopping your assault on the law."
-			print "\"Yo, that's not cool, man. What are you doing?\""
-			print "Will you explain the situation or fight the guard?"
-			action = raw_input("> ")
-			if "explain" in action: 
-				self.explain()
-			else:
-				self.guard_fight()
+		print "The guard flashes out of the booth in front of you, stopping your assault on the law."
+		print "\"Yo, that's not cool, man. What are you doing?\""
+		print "Will you explain the situation or fight the guard?"
+		action = raw_input("> ")
+		if "explain" in action: 
+			self.explain()
+		else:
+			self.guard_fight()
 	
 	def explain(self):
 		print "You explain the situation of the letter to the guard."
@@ -103,18 +105,22 @@ class River(Scene):
 			
 	def swim_river(self):
 		print "You step away from the guard and approach the river."
-		print "You inhale a deep breath and dive into the river!"
+		print "You inhale a deep breath and jump into the river!"
 		swim = random.randint(1, 10)
 		if swim <= 2:
 			print "You come up for air then begin swimming across the river"
 			weapon_find = random.randint(1, 10)
 			if weapon_find >= 4:
 				print "As you swim, you feel something hit your foot."
+				print "You dive underneath the water..."
+				weapon = choice(weapon_list)
+				print "You got the %s!" % weapon
+				player.weapon = weapon
 				
 			
 	
 	def pay_toll(self):
-	
+		pass
 							
 						
 							
@@ -236,17 +242,19 @@ def Letter():
 	print "You see a glimmer in the distance. You squint to try and figure out what it is."
 	print "Oh, it's the mail man! Looks like he's here to deliver a letter to you."
 	print " 'Sir! What is your name?' "
-	name = raw_input("> ")
-	print " 'I thought you were %s! Excellent, I have this letter for you then!' " % name
+	player.name = raw_input("> ")
+	print " 'I thought you were %s! Excellent, I have this letter for you then!' " % player.name
 	print "He hands you a letter. You look down at it, then back up at the mail man."
 	print "He has already run off in the opposite direction. Well, a mail man's job is never done."
 	print "You open the letter..."
-	print " 'Dear %s, the Evil Wizard has taken over the Palace. You have been chosen to defeat the Evil Wizard and save the world.' " % name
+	print " 'Dear %s, the Evil Wizard has taken over the Palace." % player.name
+	print "You have been chosen to defeat the Evil Wizard and save the world.' " 
 	print "You realize that you must defeat the Evil Wizard and save the world."
 	print " 'I'm going on an adventure!' "
 	Intersection1()
 
 def Intersection1():
+	print player.name
 	print "You continue upon the path until you reach a fork in the road."
 	print "The sign on the left side says Forest Ahead. The sign on the right side says River Ahead."
 	print "Will you go through the forest or the river?"
@@ -266,5 +274,5 @@ def Intersection1():
 			print "Wait, which path?"	
 
 
-
-Letter()
+if __name__ == "__main__":
+	Letter()
