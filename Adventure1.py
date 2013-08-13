@@ -6,9 +6,10 @@ class Player(object):
 
     def __init__(self):
 		self.name = "John"
-        self.weapon = "Unarmed"
-        self.inventory = []
-        self.status = "Normal"
+		self.weapon = "Unarmed"
+		self.weapon_equip = "Unarmed"
+		self.inventory = []
+		self.status = []
 
 player = Player()
 weapon_list = ['dagger', 'gun', 'sword', 'magical staff', 'lance', 'axe']
@@ -58,6 +59,10 @@ class River(Scene):
 		action = raw_input("> ")
 		if "jump" in action:
 			self.jump()
+		elif "swim" in action:
+			self.swim_river()
+		else:
+			self.pay_toll()
 		
 			
 	def jump(self):
@@ -79,29 +84,48 @@ class River(Scene):
 			print "The guard pulls a lever in the booth and the gate rises. You strut onward as the guard waves you off."
 			Shop()
 		else:
-			print "\"Yo, that's some bull right there. I don't believe you. Either pay the toll or get out. Don't MAKE me use my taser\"!"
-			print "Will you fight the guard, swim across the river, or pay the toll?"
-			action = raw_input("> ")
-			if "pay" in action: 
-				self.pay_toll()
-			elif "swim" in action:
-				self.swim_river()
-				
+			print "\"Yo, that's some bull right there. I don't believe you. Either pay the toll or get out. Don't MAKE me use my taser!\""
+			failed_explain = Status(name = "no charm")
+			player.status.append(failed_explain)
+			if "failed_pay" in player.status:
+				print "Will you fight the guard, swim across the river, or go to the forest?"
+				if "swim" in action:
+					self.swim_river()
+				elif "forest" in action:
+					self.to_forest()
+				else:
+					self.guard_fight()
 			else:
-				self.guard_fight()
+				print "Will you fight the guard, swim across the river, go to the forest, or pay the toll?"
+				action = raw_input("> ")
+				if "pay" in action: 
+					self.pay_toll()
+				elif "swim" in action:
+					self.swim_river()
+				elif "forest" in action:
+					self.to_forest()
+				else:
+					self.guard_fight()
 						
 	def guard_fight(self):
 		print "\"Ah hell nah, it is ON!\""
 		print "The guard whips out his weapon of choice: his stun gun"
 		kombat = random.randint(1,10)
-		if (kombat <= 7 and player.weapon == "Unarmed") or (kombat <= 3 and player.weapon == "Armed"):
+		if kombat <= 7:
 			print "The guard nimbly stabs you with his charged stun gun."
 			print "You shudder and fall to the ground in one spasmodic motion."
 			print "..."
 			print "You wake up back at the fork in the road to find the road to the river is walled off."
 			has_been_tased = Status(name = "Tased")
-			player.inventory.append(has_been_tased)
+			player.status.append(has_been_tased)
 			Forest()
+		else:
+			print "The guard nimbly lunges at you with his stun gun."
+			print "With the use of your heroic senses, you dodge the attack and the guard lunges past you!"
+			print "After the dodge, you elbow the guard in the back of the head and he faints."
+			print "With the guard unconscious, you hop over the gate and continue forward."
+			Shop()
+			
 			
 	def swim_river(self):
 		print "You step away from the guard and approach the river."
@@ -116,13 +140,52 @@ class River(Scene):
 				weapon = choice(weapon_list)
 				print "You got the %s!" % weapon
 				player.weapon = weapon
-				
-			
+				player.weapon_equip = "Armed"
+				print "You put away your weapon and continue swimming across the river."
+				print "You finally reach the other end of the river."
+				print "You climb out and whip your hair back and forth to dry off."
+				print "After drying off, you spot a small shop in the distance."
+				Shop()
+			else:
+				print "You are doing well in your journey across the river."
+				print "You finally reach the other end of the river."
+				print "You climb out and whip your hair back and forth to dry off."
+				print "After drying off, you spot a small shop in the distance."
+				Shop()
+		else:
+			print "When you dive into the water, your head smashes into a rock and your skull implodes."
+			Death()
 	
 	def pay_toll(self):
-		pass
-							
-						
+		print "You decide to pay the toll to cross the bridge."
+		if "money" in player.inventory:
+			print "You reach into your pocket and pull out the $20 from the forest."
+			print "You hand the money to guard and he pulls a lever in the booth to raise the gate."
+			print "You continue onward as the guard waves you off."
+			Shop()
+		else:
+			print "You reach into your pocket and, to your dismay, find no money."
+			failed_pay = Status(name = "no money")
+			player.status.append(failed_pay)
+			if "failed_explain" in player.status:
+				print "Would you like to go to the forest instead or just swim across the river?"
+				if "forest" in action:
+					self.to_forest()
+				else:
+					self.jump()
+			else:
+				print "Would you like to go to the forest instead, jump the gate, or swim across the river?"						
+				action = raw_input("> ")
+				if "forest" in action:
+					self.to_forest()
+				elif "jump" in action:
+					self.jump()
+				else:
+					self.swim_river()
+				
+	def to_forest(self):
+		print "After exploring your options, you decide to simply go to the forest instead."
+		Forest()
 							
 							
 class Forest(Scene):
@@ -135,9 +198,13 @@ class Forest(Scene):
 		print "After a fair amount of trekking through the thicket, your keen senses spot a $20 bill pinned to a tree."
 		if "has_been_tased" in player.status:
 			print "You remove the money from the tree and keep going"
+			money = Item(name = "20 dollars")
+			player.inventory.append(money)
 			self.keep_going()
 		else:
 			print "You remove the money from the tree. Would you like to go back to the river or keep going?"
+			money = Item(name = "20 dollars")
+			player.inventory.append(money)
 			action = raw_input("> ")
 			if "river" in action:
 				print "You decide to head back to the river!"
