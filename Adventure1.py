@@ -8,8 +8,8 @@ class Player(object):
 		self.name = "John"
 		self.weapon = "Unarmed"
 		self.weapon_equip = "Unarmed"
-		self.inventory = []
-		self.status = []
+		self.inventory = {}
+		self.status = {}
 
 player = Player()
 weapon_list = ['dagger', 'gun', 'sword', 'magical staff', 'lance', 'axe']
@@ -29,9 +29,6 @@ class Item(object):
 	#Pick up
 
 class Equipment(object):
-	pass
-	
-class Status(object):
 	pass
 	
 	
@@ -85,8 +82,7 @@ class River(Scene):
 			Shop()
 		else:
 			print "\"Yo, that's some bull right there. I don't believe you. Either pay the toll or get out. Don't MAKE me use my taser!\""
-			failed_explain = Status(name = "no charm")
-			player.status.append(failed_explain)
+			player.status["failed_explain"] = True
 			if "failed_pay" in player.status:
 				print "Will you fight the guard, swim across the river, or go to the forest?"
 				if "swim" in action:
@@ -116,8 +112,7 @@ class River(Scene):
 			print "You shudder and fall to the ground in one spasmodic motion."
 			print "..."
 			print "You wake up back at the fork in the road to find the road to the river is walled off."
-			has_been_tased = Status(name = "Tased")
-			player.status.append(has_been_tased)
+			player.status["has_been_tased"] = True
 			Forest()
 		else:
 			print "The guard nimbly lunges at you with his stun gun."
@@ -158,15 +153,16 @@ class River(Scene):
 	
 	def pay_toll(self):
 		print "You decide to pay the toll to cross the bridge."
-		if "money" in player.inventory:
+		if "20 dollars" in player.inventory:
 			print "You reach into your pocket and pull out the $20 from the forest."
 			print "You hand the money to guard and he pulls a lever in the booth to raise the gate."
 			print "You continue onward as the guard waves you off."
+			del player.inventory["20 dollars"]
+			print player.inventory
 			Shop()
 		else:
 			print "You reach into your pocket and, to your dismay, find no money."
-			failed_pay = Status(name = "no money")
-			player.status.append(failed_pay)
+			player.status["failed_pay"] = True
 			if "failed_explain" in player.status:
 				print "Would you like to go to the forest instead or just swim across the river?"
 				if "forest" in action:
@@ -196,15 +192,12 @@ class Forest(Scene):
 	def play(self):
 		print "You walk into a dense forest. The air around you feels richer from the amount of trees."
 		print "After a fair amount of trekking through the thicket, your keen senses spot a $20 bill pinned to a tree."
+		player.inventory["20 dollars"] = True
 		if "has_been_tased" in player.status:
 			print "You remove the money from the tree and keep going"
-			money = Item(name = "20 dollars")
-			player.inventory.append(money)
 			self.keep_going()
 		else:
 			print "You remove the money from the tree. Would you like to go back to the river or keep going?"
-			money = Item(name = "20 dollars")
-			player.inventory.append(money)
 			action = raw_input("> ")
 			if "river" in action:
 				print "You decide to head back to the river!"
@@ -238,8 +231,7 @@ class Forest(Scene):
 			print "The rabbit has escaped! That's too bad."
 		else:
 			print "You have slain the rabbit! Nice job!"
-			rabbit = Item(name = "Rabbit")
-			player.inventory.append(rabbit)
+			player.inventory["Rabbit"] = True
 			
 		print "You continue your adventure through the forest"
 		self.post_rabbit()		
