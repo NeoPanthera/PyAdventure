@@ -541,8 +541,8 @@ class DarkPalace(Scene):
 				if player.hp == 0:
 					print "The electricity courses through your body and you fall to the ground."
 					Death()	
-			print "The wizard screams, \"Haxorz!\""
-			print "Clutching your head, you ready another charge."
+				print "The wizard screams, \"Haxorz!\""
+				print "Clutching your head, you ready another charge."
 		
 class Death(Scene):
 	
