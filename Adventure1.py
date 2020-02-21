@@ -367,7 +367,7 @@ class Cave(Scene):
 		pass
 		
 	def play(self):
-		print "You spot a volcano behind the shop."
+		print "Looking around, you spot a volcano behind the shop."
 		print "That must be what the magma armor is for!"
 		print "As you approach the volcano, you start to get a lot hotter, but you notice a small cave at the base."
 		print "You equip the magma armor and head into the dark cave."
@@ -412,7 +412,7 @@ class Cave(Scene):
 	def cave_continue(self):
 		if "Sunfire Pelt" in player.inventory:
 			print "With the help of a nearby sharp stone edge, you slice the sunfirery pelt off the fallen Lava Bear."
-			print "You decide the best way to carry the sunfire pelt is to use it as a cape to help traverse the cave."
+			print "You decide the best way to carry the sunfire pelt is to wear it as a cape to help traverse the cave."
 			print "Continuing through the now lit cave, you spot a chest covered in soot!"
 			print "You dust the soot off the chest and open it..."
 			player.inventory["Amulet"] = True

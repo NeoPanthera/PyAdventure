@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  	<head>
+     	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <meta name="description" content="Adventure1 - Bootstrap">
+	    <meta name="author" content="Leo W. London">
+	    <link rel="icon" href="img/l-logo-small.png">
+
+	    <title>Adventure1</title>
+
+	    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+
+	    <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!--Personal CSS-->
+		<link href="css/main.css" rel="stylesheet">
+
+		<!--Personal Script-->
+		<script src="adventure.js"></script>
+	</head>
+
+	<body>
+
+	<!--Inventory-->
+	<div class="inventory">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid" id="inventoryBox">
+				<div class="navbar-header">
+					<div class="navbar-brand">Inventory</div>
+				</div>
+				<ul class="nav navbar-nav" id="inventoryDisplay">
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!--Screen-->
+	<div class="screen">
+		<img id="screenImage" src="img/backgrounds/meadow.jpg">
+	</div>
+
+	<!--Dialogue and Options-->
+	<div class="bottom">
+		<nav class="navbar navbar-inverse" id="dialogue">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav" id="dialogueBox">
+					<li id="dialogueText"><i>Press the Spacebar or Enter/Return key, or press the Continue button, to progress the text!</i></li>
+				</ul>
+			</div>
+		</nav>
+		<nav class="navbar navbar-inverse" id="options">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav" id="optionsBox">
+					<li id="option0"><button id="button0">Continue</button></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+    </body>
+</html>

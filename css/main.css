@@ -1,0 +1,88 @@
+html, body
+{
+    height: 100%;
+    color: white;
+    background-color: black;
+    overflow: hidden;
+}
+
+.inventory {
+	position: relative;
+}
+
+#inventoryBox {
+	background-image: linear-gradient(to bottom,#080808 0,#0f0f0f 100%);
+}
+
+.navbar-inverse .navbar-brand {
+	color: #FFF;
+	background-image: -webkit-linear-gradient(top,#3c3c3c 0,#222 100%);
+    background-image: -o-linear-gradient(top,#3c3c3c 0,#222 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#3c3c3c),to(#222));
+    background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
+
+}
+
+.inventory > .navbar {
+	margin-bottom: 0px;
+}
+
+#inventoryDisplay > li{
+	padding: 5px;
+}
+
+li > img{
+	height: 40px;
+	width: auto;
+}
+
+/* Tooltip */
+.tooltip > .tooltip-inner {
+	background-color: #000; 
+	border: 1px solid white; 
+	font-size: 1.1em;
+	z-index: 1;
+	left: 100px;
+}
+/* Tooltip on bottom */
+.tooltip.bottom > .tooltip-arrow {
+	border-bottom: 5px solid white;
+	left: 100px;
+}
+
+.screen {
+	position: relative;
+}
+
+#screenImage {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.bottom {
+	position: relative;
+}
+
+.bottom > .navbar {
+	margin-bottom: 0px;
+}
+
+#dialogue { 
+	background-image: linear-gradient(to bottom,#080808 0,#0f0f0f 100%);
+}
+
+li{ 
+	display: block;
+    padding: 10px 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+button, input{
+	color: black;
+}
